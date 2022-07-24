@@ -14,7 +14,7 @@ class Product(models.Model):
         blank=True
     )
     price = models.DecimalField(
-        max_digits=10_000,
+        max_digits=10,
         decimal_places=2
     )
 
@@ -40,14 +40,14 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL)
+    product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
     product_price = models.DecimalField(
-        max_digits=10_000,
+        max_digits=10,
         decimal_places=2
     )
     product_count = models.PositiveIntegerField(default=1)
     product_cost = models.DecimalField(
-        max_digits=100_000,
+        max_digits=10,
         decimal_places=2
     )
 
@@ -56,7 +56,7 @@ class OrderItem(models.Model):
 
 
 class Invoice(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL)
+    order = models.ForeignKey(Order, null=True, on_delete=models.SET_NULL)
     invoice_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
@@ -68,10 +68,10 @@ class Transaction(models.Model):
         PENDING = _('pending')
         FAILED = _('failed')
         COMPLETED = _('completed')
-    invoice = models.ForeignKey(Invoice, on_delete=models.SET_NULL)
+    invoice = models.ForeignKey(Invoice, null=True, on_delete=models.SET_NULL)
     transaction_date = models.DateTimeField(auto_now_add=True)
     amount = models.DecimalField(
-        max_digits=100_000,
+        max_digits=10,
         decimal_places=2
     )
     status = models.CharField(
