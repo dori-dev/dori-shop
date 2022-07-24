@@ -35,7 +35,12 @@ class Order(models.Model):
     order_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return self.customer.username
+        return f"{self.customer.username}'s order"
+
+    class Meta:
+        ordering = ('order_time',)
+        verbose_name = _('Order')
+        verbose_name_plural = _('Orders')
 
 
 class OrderItem(models.Model):
@@ -52,7 +57,11 @@ class OrderItem(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.id
+        return f"order item {self.id}"
+
+    class Meta:
+        verbose_name = _('Order Item')
+        verbose_name_plural = _('Order Items')
 
 
 class Invoice(models.Model):
@@ -60,7 +69,12 @@ class Invoice(models.Model):
     invoice_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return self.id
+        return f"invoice {self.id}"
+
+    class Meta:
+        ordering = ('invoice_time',)
+        verbose_name = _('Invoice')
+        verbose_name_plural = _('Invoices')
 
 
 class Transaction(models.Model):
@@ -69,7 +83,7 @@ class Transaction(models.Model):
         FAILED = _('failed')
         COMPLETED = _('completed')
     invoice = models.ForeignKey(Invoice, null=True, on_delete=models.SET_NULL)
-    transaction_date = models.DateTimeField(auto_now_add=True)
+    transaction_time = models.DateTimeField(auto_now_add=True)
     amount = models.DecimalField(
         max_digits=10,
         decimal_places=2
@@ -81,4 +95,9 @@ class Transaction(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.id
+        return f"transaction {self.id}"
+
+    class Meta:
+        ordering = ('transaction_time',)
+        verbose_name = _('Transaction')
+        verbose_name_plural = _('Transactions')
