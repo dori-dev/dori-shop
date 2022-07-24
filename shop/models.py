@@ -25,7 +25,7 @@ class Product(models.Model):
         return reverse('shop:product', args=(self.id,))
 
     class Meta:
-        ordering = ('created_time',)
+        ordering = ('-created_time',)
         verbose_name = _('Product')
         verbose_name_plural = _('Products')
 
