@@ -2,11 +2,16 @@ from django.contrib import admin
 from . import models
 
 
+class ProductImageAdmin(admin.TabularInline):
+    model = models.ProductImage
+
+
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
         'name', 'description', 'created_time',
         'updated_time', 'price'
     )
+    inlines = (ProductImageAdmin,)
 
 
 class OrderAdmin(admin.ModelAdmin):

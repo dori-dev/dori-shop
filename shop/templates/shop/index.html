@@ -123,7 +123,9 @@
                   <!-- product -->
                   <div class="product">
                     <div class="product-img">
-                      <img src="{{ product.image.url }}" alt="" />
+                      <a href="{{ product.get_absolute_url }}">
+                        <img src="{{ product.image.url }}" alt="" />
+                      </a>
                       <div class="product-label">
                         <span class="sale">-30%</span>
                         <span class="new">NEW</span>
@@ -133,7 +135,8 @@
                       <!-- TODO add category to product -->
                       <p class="product-category">Category</p>
                       <h3 class="product-name">
-                        <a href="#">{{ product.name }}</a>
+                        <!-- TODO add slug to product -->
+                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
                       </h3>
                       <h4 class="product-price">
                         <!-- TODO add discount to product -->

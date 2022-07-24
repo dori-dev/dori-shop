@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from . import models
 
 
@@ -10,8 +10,12 @@ def index(request):
     return render(request, 'shop/index.html', context)
 
 
-def product(request):
-    return render(request, 'shop/product.html')
+def product(request, pk: int):
+    product_object = get_object_or_404(models.Product, id=pk)
+    context = {
+        'product': product_object,
+    }
+    return render(request, 'shop/product.html', context)
 
 
 def store(request):

@@ -30,6 +30,15 @@ class Product(models.Model):
         verbose_name_plural = _('Products')
 
 
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    image = models.ImageField(
+        _("Images"),
+        upload_to="images/product/%Y/%m/%d",
+        blank=True
+    )
+
+
 class Order(models.Model):
     customer: User = models.ForeignKey(User, on_delete=models.CASCADE)
     order_time = models.DateTimeField(auto_now_add=True)
