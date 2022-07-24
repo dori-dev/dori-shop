@@ -1,5 +1,15 @@
-env/
-.idea/
-db.sqlite3
+# Django
 migrations/
-__pycache__
+db.sqlite3
+staticfiles/
+
+# Python
+__pycache__/
+
+# Environments
+.env
+env/
+
+# Other
+test/
+img/
