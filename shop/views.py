@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render
+from cart.forms import CartAddProductForm
 from . import models
 
 
@@ -12,8 +13,10 @@ def index(request):
 
 def product(request, pk: int):
     product_object = get_object_or_404(models.Product, id=pk)
+    form = CartAddProductForm()
     context = {
         'product': product_object,
+        'form': form
     }
     return render(request, 'shop/product.html', context)
 
