@@ -1,6 +1,9 @@
+from decimal import Decimal
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
+from django.core.handlers.wsgi import WSGIRequest
 from cart.forms import CartAddProductForm
+from cart.cart import Cart
 from . import models
 
 
@@ -25,6 +28,25 @@ def product(request, pk: int):
 def store(request):
     return render(request, 'shop/store.html')
 
+
 @login_required
-def checkout(request):
+def checkout(request: WSGIRequest):
+    if request.method == 'POST':
+        cart = Cart(request)
+        order = models.Order.objects.create(
+            customer=request.user
+        )
+        for item in cart:
+            models.OrderItem.objects.create(
+                order=order,
+                product=item['product'],
+                product_price=item['price'],
+                product_count=item['product_count'],
+                product_cost=Decimal(item['total_price'])
+            )
+        cart.clear()
+        context = {
+            'order': order,
+        }
+        return render(request, 'shop/order.html', context)
     return render(request, 'shop/checkout.html')

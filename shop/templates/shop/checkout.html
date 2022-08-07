@@ -257,7 +257,10 @@
             <div><strong class="order-total">${{ cart.get_total_price }}</strong></div>
           </div>
         </div>
-        <a href="#" class="primary-btn order-submit">Place order</a>
+        <form action="" method="post">
+          <button type="submit" class="primary-btn order-submit">Place order</button>
+          {% csrf_token %}
+        </form>
       </div>
       <!-- /Order Details -->
     </div>

@@ -1939,6 +1939,7 @@ textarea.input {
 
 .order-details .order-submit {
   display: block;
+  width: 100%;
   margin-top: 30px;
 }
 
