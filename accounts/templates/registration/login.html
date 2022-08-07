@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Login{% endblock title %}
+
+
+{% block content %}
+<div class="container">
+    {% if next %}
+    <form action="{% url 'accounts:login' %}?next={{ next }}" method="post">
+    {% else %}
+    <form action="{% url 'accounts:login' %}" method="post">
+    {% endif %}
+    <p>
+        <label for="username">Username</label>
+        <input type="text" name="username">
+    </p>
+    <p>
+        <label for="password">Password</label>
+        <input type="password" name="password">
+    </p>
+    {% csrf_token %}
+    <input type="submit" value="Login">
+    </form>
+</div>
+{% endblock content %}
+    
+    

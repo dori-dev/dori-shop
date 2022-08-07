@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.decorators import login_required
 from cart.forms import CartAddProductForm
 from . import models
 
@@ -24,6 +25,6 @@ def product(request, pk: int):
 def store(request):
     return render(request, 'shop/store.html')
 
-
+@login_required
 def checkout(request):
     return render(request, 'shop/checkout.html')
