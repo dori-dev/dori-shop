@@ -12,7 +12,7 @@
         <p class="lead mb-5">You order was successfully completed.</p>
         <p class="lead mb-5">Your Order Number : {{ order.id }}</p>
         <p>
-          <a href="" class="primary-btn order-submit">
+          <a href="{% url 'shop:to_bank' order.id %}" class="primary-btn order-submit">
             Online Payment
           </a>
         </p>

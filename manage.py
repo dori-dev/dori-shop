@@ -5,6 +5,7 @@ import sys
 import pathlib
 import dotenv
 
+
 def main():
     """Run administrative tasks."""
     DOT_ENV_PATH = pathlib.Path() / '.env'
