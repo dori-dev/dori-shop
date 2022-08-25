@@ -11,14 +11,14 @@
     <!-- responsive-nav -->
     <div id="responsive-nav">
       <!-- NAV -->
-      <ul class="main-nav nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Hot Deals</a></li>
-        <li><a href="#">Categories</a></li>
-        <li><a href="#">Laptops</a></li>
-        <li><a href="#">Smartphones</a></li>
-        <li><a href="#">Cameras</a></li>
-        <li><a href="#">Accessories</a></li>
+      <ul class="main-nav nav navbar-nav right reverse">
+        <li class="active"><a href="#">خانه</a></li>
+        <li><a href="#">برترین ها</a></li>
+        <li><a href="#">پرفروش ترین ها</a></li>
+        <li><a href="#">دسته بندی ها</a></li>
+        <li><a href="#">کالای های دیجیتال</a></li>
+        <li><a href="#">موبایل های هوشمند</a></li>
+        <li><a href="#">لپ تاپ ها</a></li>
       </ul>
       <!-- /NAV -->
     </div>
@@ -41,10 +41,15 @@
             <img src="{% static 'img/shop01.png' %}" alt="" />
           </div>
           <div class="shop-body">
-            <h3>Laptop<br />Collection</h3>
-            <a href="#" class="cta-btn"
-              >Shop now <i class="fa fa-arrow-circle-right"></i
-            ></a>
+            <h3>
+              مجموعه
+              <br />
+              لپ تاپ ها
+            </h3>
+            <a href="#" class="cta-btn">
+              خرید کنید
+              <i class="fa fa-arrow-circle-left"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -57,10 +62,15 @@
             <img src="{% static 'img/shop03.png' %}" alt="" />
           </div>
           <div class="shop-body">
-            <h3>Accessories<br />Collection</h3>
-            <a href="#" class="cta-btn"
-              >Shop now <i class="fa fa-arrow-circle-right"></i
-            ></a>
+            <h3>
+              مجموعه
+              <br />
+              محصولات دیجیتال
+            </h3>
+            <a href="#" class="cta-btn">
+              خرید کنید
+              <i class="fa fa-arrow-circle-left"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -73,10 +83,15 @@
             <img src="{% static 'img/shop02.png' %}" alt="" />
           </div>
           <div class="shop-body">
-            <h3>Cameras<br />Collection</h3>
-            <a href="#" class="cta-btn"
-              >Shop now <i class="fa fa-arrow-circle-right"></i
-            ></a>
+            <h3>
+              مجموعه
+              <br />
+              موبایل ها
+            </h3>
+            <a href="#" class="cta-btn">
+              خرید کنید
+              <i class="fa fa-arrow-circle-left"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -133,7 +148,7 @@
                     </div>
                     <div class="product-body">
                       <!-- TODO add category to product -->
-                      <p class="product-category">Category</p>
+                      <p class="product-category">دسته بندی</p>
                       <h3 class="product-name">
                         <!-- TODO add slug to product -->
                         <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
@@ -152,7 +167,7 @@
                       <div class="product-btns">
                         <button class="add-to-wishlist">
                           <i class="fa fa-heart-o"></i
-                          ><span class="tooltipp">add to wishlist</span>
+                          ><span class="tooltipp">اضافه کردن به علاقه مندی ها</span>
                         </button>
                         <button class="add-to-compare">
                           <i class="fa fa-exchange"></i
@@ -160,7 +175,7 @@
                         </button>
                         <button class="quick-view">
                           <i class="fa fa-eye"></i
-                          ><span class="tooltipp">quick view</span>
+                          ><span class="tooltipp">دیدن محصول</span>
                         </button>
                       </div>
                     </div>
@@ -199,31 +214,31 @@
             <li>
               <div>
                 <h3>02</h3>
-                <span>Days</span>
+                <span>روز</span>
               </div>
             </li>
             <li>
               <div>
                 <h3>10</h3>
-                <span>Hours</span>
+                <span>ساعت</span>
               </div>
             </li>
             <li>
               <div>
                 <h3>34</h3>
-                <span>Mins</span>
+                <span>دقیقه</span>
               </div>
             </li>
             <li>
               <div>
                 <h3>60</h3>
-                <span>Secs</span>
+                <span>ثانیه</span>
               </div>
             </li>
           </ul>
-          <h2 class="text-uppercase">hot deal this week</h2>
-          <p>New Collection Up to 50% OFF</p>
-          <a class="primary-btn cta-btn" href="#">Shop now</a>
+          <h2 class="text-uppercase">پیشنهاد داغ این هفته</h2>
+          <p>تا بیش از ۵۰٪ تخفیف</p>
+          <a class="primary-btn cta-btn" href="#">همین الان خرید کنید</a>
         </div>
       </div>
     </div>

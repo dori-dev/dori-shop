@@ -6,10 +6,10 @@
 
 /* Icons */
 @font-face {
-  font-family: "slick";
+  font-family: "Vazir";
   font-weight: normal;
   font-style: normal;
-  src: url("../fonts/slick.woff") format("woff");
+  src: url("../fonts/Vazir.woff2") format("woff2");
 }
 
 /* Arrows */
@@ -58,7 +58,7 @@
 
 .slick-prev:before,
 .slick-next:before {
-  font-family: "slick";
+  font-family: "Vazir";
   font-size: 20px;
   line-height: 1;
 
@@ -154,7 +154,7 @@
   opacity: 1;
 }
 .slick-dots li button:before {
-  font-family: "slick";
+  font-family: "Vazir";
   font-size: 6px;
   line-height: 20px;
 
