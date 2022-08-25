@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from operator import ge
 import os
 from pathlib import Path
 
@@ -163,15 +164,23 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
-# SOCIALACCOUNT_PROVIDERS = {
-#     'google': {
-#         'APP': {
-#             'client_id': '123',
-#             'secret': '456',
-#             'key': ''
-#         }
-#     }
-# }
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'offline',
+        },
+        'APP': {
+            'client_id': os.environ.get('CLIENT_ID', 'client id'),
+            'secret': os.environ.get('CLIENT_SECRET', 'client secret'),
+            'key': ''
+        }
+    }
+}
+
 
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
@@ -185,4 +194,3 @@ EMAIL_USE_SSL = True
 EMAIL_PORT = 465
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER', 'username@gmail.com')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD', 'password')
-DEFAULT_FROM_EMAIL = 'dorimohammad989@gmail.com'
