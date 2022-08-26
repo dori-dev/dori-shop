@@ -487,6 +487,14 @@ select.category {
   display: block;
 }
 
+.header-logo .logo svg {
+  display: block;
+  fill: #fff;
+  width: 200px;
+  height: 200px;
+  max-height: 70px
+}
+
 /* 
 	Search
 */
@@ -824,8 +832,8 @@ select.category {
 .shop .shop-body .cta-btn {
   color: #fff;
   text-shadow: 0.4px 0 0 #000, -0.4px 0 0 #000, 0 0.4px 0 #000, 0 -0.4px 0 #000,
-  0.4px 0.4px #000, -0.4px -0.4px 0 #000, 0.5px -0.5px 0 #000,
-  -0.5px 0.5px 0 #000;
+    0.4px 0.4px #000, -0.4px -0.4px 0 #000, 0.5px -0.5px 0 #000,
+    -0.5px 0.5px 0 #000;
   text-transform: uppercase;
 }
 
