@@ -25,6 +25,7 @@
       speed: 300,
       dots: false,
       arrows: true,
+      rtl: true,
       appendArrows: $nav ? $nav : false,
       responsive: [
         {
@@ -55,7 +56,8 @@
       autoplay: true,
       speed: 300,
       dots: false,
-      arrows: true,
+      arrows: false,
+      rtl: true,
       appendArrows: $nav ? $nav : false,
     });
   });

@@ -16,9 +16,10 @@ client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl/')
 
 
 def index(request):
-    latest_products = models.Product.objects.all()[:5]
     context = {
-        'latest_products': latest_products,
+        'latest_products': models.Product.objects.all()[:9],
+        # TODO add selling number and best sell filter
+        'best_selling_products': models.Product.objects.all()[:9],
     }
     return render(request, 'shop/index.html', context)
 
