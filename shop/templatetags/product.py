@@ -8,4 +8,9 @@ def chunks(array: list, n: int):
         yield array[index:index+n]
 
 
+def add_comma(number: int) -> str:
+    return f"{number:,}".replace(',', '،')
+
+
 register.filter("chunks", chunks)
+register.filter("comma", add_comma)
