@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}product{% endblock title %}
+{% block title %}{{ product.name}}{% endblock title %}
 
 {% block content %}
 <!-- NAVIGATION -->
@@ -11,14 +11,14 @@
     <!-- responsive-nav -->
     <div id="responsive-nav">
       <!-- NAV -->
-      <ul class="main-nav nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Hot Deals</a></li>
-        <li><a href="#">Categories</a></li>
-        <li><a href="#">Laptops</a></li>
-        <li><a href="#">Smartphones</a></li>
-        <li><a href="#">Cameras</a></li>
-        <li><a href="#">Accessories</a></li>
+      <ul class="main-nav nav navbar-nav right reverse">
+        <li class="active"><a href="#">خانه</a></li>
+        <li><a href="#">برترین ها</a></li>
+        <li><a href="#">پرفروش ترین ها</a></li>
+        <li><a href="#">دسته بندی ها</a></li>
+        <li><a href="#">کالای های دیجیتال</a></li>
+        <li><a href="#">موبایل های هوشمند</a></li>
+        <li><a href="#">لپ تاپ ها</a></li>
       </ul>
       <!-- /NAV -->
     </div>
@@ -36,10 +36,10 @@
     <div class="row">
       <div class="col-md-12">
         <ul class="breadcrumb-tree">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">All Categories</a></li>
-          <li><a href="#">Accessories</a></li>
-          <li><a href="#">Headphones</a></li>
+          <li><a href="#">خانه</a></li>
+          <li><a href="#">تمام دسته بندی ها</a></li>
+          <li><a href="#">تکنولوژی</a></li>
+          <li><a href="#">موبایل</a></li>
           <li class="active">{{ product.name }}</li>
         </ul>
       </div>
@@ -63,9 +63,9 @@
             <img src="{{ product.image.url }}" alt="" />
           </div>
           {% for productimage in product.productimage_set.all %}
-            <div class="product-preview">
-              <img src="{{ productimage.image.url }}" alt="" />
-            </div>
+          <div class="product-preview">
+            <img src="{{ productimage.image.url }}" alt="" />
+          </div>
           {% endfor %}
         </div>
       </div>
@@ -78,9 +78,9 @@
             <img src="{{ product.image.url }}" alt="" />
           </div>
           {% for productimage in product.productimage_set.all %}
-            <div class="product-preview">
-              <img src="{{ productimage.image.url }}" alt="" />
-            </div>
+          <div class="product-preview">
+            <img src="{{ productimage.image.url }}" alt="" />
+          </div>
           {% endfor %}
         </div>
       </div>
@@ -98,63 +98,59 @@
               <i class="fa fa-star"></i>
               <i class="fa fa-star-o"></i>
             </div>
-            <a class="review-link" href="#">10 Review(s) | Add your review</a>
+            <a class="review-link" href="#">۱۰ نظر | افزودن نظر</a>
           </div>
           <div>
             <h3 class="product-price">
-              ${{ product.price }} <del class="product-old-price">$990.00</del>
+              <del class="product-old-price">990.00 تومان</del>
+              <span>{{ product.price }} تومان</span>
             </h3>
-            <span class="product-available">In Stock</span>
           </div>
-          <p>
-            {{ product.description }}
-          </p>
+          <p>{{ product.short_description|linebreaks }}</p>
 
           <div class="product-options">
             <label>
-              Size
+              سایز
               <select class="input-select">
                 <option value="0">X</option>
               </select>
             </label>
             <label>
-              Color
+              رنگ
               <select class="input-select">
-                <option value="0">Red</option>
+                <option value="0">قرمز</option>
               </select>
             </label>
           </div>
 
           <div class="product-options add-to-cart">
             <form action="{% url 'cart:cart_add' product.id %}" method="post">
-              <label>
-                Count
-                {{ form.product_count }}
-              </label>
+              <label> تعداد {{ form.product_count }} </label>
               {% csrf_token %}
               <button type="submit" class="add-to-cart-btn">
-                <i class="fa fa-shopping-cart"></i> add to cart
+                <i class="fa fa-shopping-cart"></i>
+                افزودن به سبد خرید
               </button>
             </form>
           </div>
 
           <ul class="product-btns">
             <li>
-              <a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-exchange"></i> add to compare</a>
+              <a href="#"
+                ><i class="fa fa-heart-o"></i>
+                افزودن به علاقه مندی ها
+              </a>
             </li>
           </ul>
 
           <ul class="product-links">
-            <li>Category:</li>
-            <li><a href="#">Headphones</a></li>
-            <li><a href="#">Accessories</a></li>
+            <li>درسته بندی:</li>
+            <li><a href="#">تکنولوژی</a></li>
+            <li><a href="#">موبایل</a></li>
           </ul>
 
           <ul class="product-links">
-            <li>Share:</li>
+            <li>اشتراک گذاری:</li>
             <li>
               <a href="#"><i class="fa fa-facebook"></i></a>
             </li>
@@ -178,10 +174,10 @@
           <!-- product tab nav -->
           <ul class="tab-nav">
             <li class="active">
-              <a data-toggle="tab" href="#tab1">Description</a>
+              <a data-toggle="tab" href="#tab1">توضیحات</a>
             </li>
-            <li><a data-toggle="tab" href="#tab2">Details</a></li>
-            <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+            <li><a data-toggle="tab" href="#tab2">جزئیات</a></li>
+            <li><a data-toggle="tab" href="#tab3">نظرات (3)</a></li>
           </ul>
           <!-- /product tab nav -->
 
@@ -192,14 +188,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
+                    {{ product.description|linebreaks }}
                   </p>
                 </div>
               </div>
@@ -211,14 +200,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
+                    {{ product.details }}
                   </p>
                 </div>
               </div>
@@ -397,19 +379,19 @@
                       <input
                         class="input"
                         type="text"
-                        placeholder="Your Name"
+                        placeholder="نام شما ..."
                       />
                       <input
                         class="input"
                         type="email"
-                        placeholder="Your Email"
+                        placeholder="ایمیل شما ..."
                       />
                       <textarea
                         class="input"
-                        placeholder="Your Review"
+                        placeholder="نظر شما ..."
                       ></textarea>
                       <div class="input-rating">
-                        <span>Your Rating: </span>
+                        <span>امتیاز شما: </span>
                         <div class="stars">
                           <input
                             id="star5"
@@ -443,7 +425,7 @@
                           /><label for="star1"></label>
                         </div>
                       </div>
-                      <button class="primary-btn">Submit</button>
+                      <button class="primary-btn">ارسال</button>
                     </form>
                   </div>
                 </div>
@@ -471,64 +453,34 @@
     <div class="row">
       <div class="col-md-12">
         <div class="section-title text-center">
-          <h3 class="title">Related Products</h3>
+          <h3 class="title">محصولات مرتبط</h3>
         </div>
       </div>
-
+      {% for product in related_products %}
       <!-- product -->
       <div class="col-md-3 col-xs-6">
         <div class="product">
           <div class="product-img">
-            <img src="{% static 'img/product01.png' %}" alt="" />
-            <div class="product-label">
+            <a href="{{ product.get_absolute_url }}">
+              <img src="{{ product.image.url }}" alt="" />
+            </a>
+            <div class="product-label ltr">
               <span class="sale">-30%</span>
+              <span class="new">جدید</span>
             </div>
           </div>
           <div class="product-body">
-            <p class="product-category">Category</p>
-            <h3 class="product-name"><a href="#">product name goes here</a></h3>
+            <!-- TODO add category to product -->
+            <p class="product-category">دسته بندی</p>
+            <h3 class="product-name">
+              <!-- TODO add slug to product -->
+              <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+            </h3>
             <h4 class="product-price">
-              $980.00 <del class="product-old-price">$990.00</del>
-            </h4>
-            <div class="product-rating"></div>
-            <div class="product-btns">
-              <button class="add-to-wishlist">
-                <i class="fa fa-heart-o"></i
-                ><span class="tooltipp">add to wishlist</span>
-              </button>
-              <button class="add-to-compare">
-                <i class="fa fa-exchange"></i
-                ><span class="tooltipp">add to compare</span>
-              </button>
-              <button class="quick-view">
-                <i class="fa fa-eye"></i
-                ><span class="tooltipp">quick view</span>
-              </button>
-            </div>
-          </div>
-          <div class="add-to-cart">
-            <button class="add-to-cart-btn">
-              <i class="fa fa-shopping-cart"></i> add to cart
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- /product -->
-
-      <!-- product -->
-      <div class="col-md-3 col-xs-6">
-        <div class="product">
-          <div class="product-img">
-            <img src="{% static 'img/product02.png' %}" alt="" />
-            <div class="product-label">
-              <span class="new">NEW</span>
-            </div>
-          </div>
-          <div class="product-body">
-            <p class="product-category">Category</p>
-            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-            <h4 class="product-price">
-              $980.00 <del class="product-old-price">$990.00</del>
+              <!-- TODO add discount to product -->
+              <del class="product-old-price">3،000،000 تومان</del>
+              <br />
+              <span>{{ product.price }} تومان</span>
             </h4>
             <div class="product-rating">
               <i class="fa fa-star"></i>
@@ -540,108 +492,24 @@
             <div class="product-btns">
               <button class="add-to-wishlist">
                 <i class="fa fa-heart-o"></i
-                ><span class="tooltipp">add to wishlist</span>
-              </button>
-              <button class="add-to-compare">
-                <i class="fa fa-exchange"></i
-                ><span class="tooltipp">add to compare</span>
+                ><span class="tooltipp">اضافه کردن به علاقه مندی ها</span>
               </button>
               <button class="quick-view">
-                <i class="fa fa-eye"></i
-                ><span class="tooltipp">quick view</span>
+                <i class="fa fa-eye"></i>
+                <span class="tooltipp"> دیدن محصول </span>
               </button>
             </div>
           </div>
           <div class="add-to-cart">
             <button class="add-to-cart-btn">
-              <i class="fa fa-shopping-cart"></i> add to cart
+              <i class="fa fa-shopping-cart"></i>
+              افزودن به سبد خرید
             </button>
           </div>
         </div>
       </div>
       <!-- /product -->
-
-      <div class="clearfix visible-sm visible-xs"></div>
-
-      <!-- product -->
-      <div class="col-md-3 col-xs-6">
-        <div class="product">
-          <div class="product-img">
-            <img src="{% static 'img/product03.png' %}" alt="" />
-          </div>
-          <div class="product-body">
-            <p class="product-category">Category</p>
-            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-            <h4 class="product-price">
-              $980.00 <del class="product-old-price">$990.00</del>
-            </h4>
-            <div class="product-rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star-o"></i>
-            </div>
-            <div class="product-btns">
-              <button class="add-to-wishlist">
-                <i class="fa fa-heart-o"></i
-                ><span class="tooltipp">add to wishlist</span>
-              </button>
-              <button class="add-to-compare">
-                <i class="fa fa-exchange"></i
-                ><span class="tooltipp">add to compare</span>
-              </button>
-              <button class="quick-view">
-                <i class="fa fa-eye"></i
-                ><span class="tooltipp">quick view</span>
-              </button>
-            </div>
-          </div>
-          <div class="add-to-cart">
-            <button class="add-to-cart-btn">
-              <i class="fa fa-shopping-cart"></i> add to cart
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- /product -->
-
-      <!-- product -->
-      <div class="col-md-3 col-xs-6">
-        <div class="product">
-          <div class="product-img">
-            <img src="{% static 'img/product04.png' %}" alt="" />
-          </div>
-          <div class="product-body">
-            <p class="product-category">Category</p>
-            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-            <h4 class="product-price">
-              $980.00 <del class="product-old-price">$990.00</del>
-            </h4>
-            <div class="product-rating"></div>
-            <div class="product-btns">
-              <button class="add-to-wishlist">
-                <i class="fa fa-heart-o"></i
-                ><span class="tooltipp">add to wishlist</span>
-              </button>
-              <button class="add-to-compare">
-                <i class="fa fa-exchange"></i
-                ><span class="tooltipp">add to compare</span>
-              </button>
-              <button class="quick-view">
-                <i class="fa fa-eye"></i
-                ><span class="tooltipp">quick view</span>
-              </button>
-            </div>
-          </div>
-          <div class="add-to-cart">
-            <button class="add-to-cart-btn">
-              <i class="fa fa-shopping-cart"></i> add to cart
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- /product -->
+      {% endfor %}
     </div>
     <!-- /row -->
   </div>

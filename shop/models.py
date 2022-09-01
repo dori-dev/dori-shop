@@ -6,7 +6,9 @@ from django.utils.translation import gettext_lazy as _
 
 class Product(models.Model):
     name = models.CharField(max_length=128)
+    short_description = models.TextField()
     description = models.TextField()
+    details = models.TextField()
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
     image = models.ImageField(
