@@ -27,9 +27,11 @@ def index(request):
 def product(request, pk: int):
     product_object = get_object_or_404(models.Product, id=pk)
     form = CartAddProductForm()
+    related_products = models.Product.objects.all()[:4]
     context = {
         'product': product_object,
-        'form': form
+        'form': form,
+        'related_products': related_products,
     }
     return render(request, 'shop/product.html', context)
 
@@ -51,7 +53,7 @@ def checkout(request: WSGIRequest):
                 product=item['product'],
                 product_price=item['price'],
                 product_count=item['product_count'],
-                product_cost=Decimal(item['total_price'])
+                product_cost=int(Decimal(item['total_price']))
             )
         cart.clear()
         context = {

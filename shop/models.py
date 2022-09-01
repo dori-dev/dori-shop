@@ -13,10 +13,7 @@ class Product(models.Model):
         upload_to='images/product/%Y/%m/%d',
         blank=True
     )
-    price = models.DecimalField(
-        max_digits=10,
-        decimal_places=2
-    )
+    price = models.IntegerField()
 
     def __str__(self) -> str:
         return self.name
@@ -55,15 +52,9 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
-    product_price = models.DecimalField(
-        max_digits=10,
-        decimal_places=2
-    )
+    product_price = models.IntegerField()
     product_count = models.PositiveIntegerField(default=1)
-    product_cost = models.DecimalField(
-        max_digits=10,
-        decimal_places=2
-    )
+    product_cost = models.IntegerField()
 
     def __str__(self) -> str:
         return f"order item {self.id}"
@@ -99,10 +90,7 @@ class Transaction(models.Model):
         COMPLETED = _('completed')
     invoice = models.ForeignKey(Invoice, null=True, on_delete=models.SET_NULL)
     transaction_time = models.DateTimeField(auto_now_add=True)
-    amount = models.DecimalField(
-        max_digits=10,
-        decimal_places=2
-    )
+    amount = models.IntegerField()
     status = models.CharField(
         max_length=12,
         choices=Status.choices,
