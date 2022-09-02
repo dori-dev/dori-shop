@@ -188,7 +188,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <p>
-                    {{ product.description|linebreaks }}
+                    {{ product.description|safe }}
                   </p>
                 </div>
               </div>
@@ -200,7 +200,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <p>
-                    {{ product.details }}
+                    {{ product.details|safe }}
                   </p>
                 </div>
               </div>

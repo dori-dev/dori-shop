@@ -4,3 +4,4 @@ django-dotenv==1.4.2
 psycopg2==2.9.3
 zeep==4.1.0
 django-allauth==0.51.0
+django-tinymce==3.5.0

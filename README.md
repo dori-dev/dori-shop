@@ -15,3 +15,4 @@ Quick view
 Comments
 Search
 Blog
+Accounts and Registration

@@ -1,9 +1,12 @@
 from random import choices
 from string import ascii_letters
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+
+from tinymce.models import HTMLField
 
 
 class Product(models.Model):
@@ -16,8 +19,8 @@ class Product(models.Model):
         unique=True,
     )
     short_description = models.TextField()
-    description = models.TextField()
-    details = models.TextField()
+    description = HTMLField()
+    details = HTMLField()
     created_time = models.DateTimeField(
         auto_now_add=True,
     )
