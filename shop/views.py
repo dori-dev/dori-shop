@@ -24,8 +24,8 @@ def index(request):
     return render(request, 'shop/index.html', context)
 
 
-def product(request, pk: int):
-    product_object = get_object_or_404(models.Product, id=pk)
+def product_detail(request, slug: str):
+    product_object = get_object_or_404(models.Product, slug=slug)
     form = CartAddProductForm()
     related_products = models.Product.objects.all()[:4]
     context = {
@@ -33,7 +33,7 @@ def product(request, pk: int):
         'form': form,
         'related_products': related_products,
     }
-    return render(request, 'shop/product.html', context)
+    return render(request, 'shop/product_detail.html', context)
 
 
 def store(request):

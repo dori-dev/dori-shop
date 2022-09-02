@@ -1,3 +1,5 @@
+from random import choices
+from string import ascii_letters
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -5,21 +7,31 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=128)
+    name = models.CharField(
+        max_length=128,
+    )
+    slug = models.CharField(
+        max_length=4,
+        editable=False,
+        unique=True,
+    )
     short_description = models.TextField()
     description = models.TextField()
     details = models.TextField()
-    created_time = models.DateTimeField(auto_now_add=True)
-    updated_time = models.DateTimeField(auto_now=True)
+    created_time = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated_time = models.DateTimeField(
+        auto_now=True,
+    )
     image = models.ImageField(
         upload_to='images/product/%Y/%m/%d',
-        blank=True
+        blank=True,
     )
     price = models.IntegerField()
-    rate = models.FloatField(default=5)
-
-    def __str__(self) -> str:
-        return self.name
+    rate = models.FloatField(
+        default=5,
+    )
 
     def get_rating(self):
         INCREASER = 0.2
@@ -31,7 +43,21 @@ class Product(models.Model):
         return stars, half_stars, empty_stars
 
     def get_absolute_url(self):
-        return reverse('shop:product', args=(self.id,))
+        return reverse('shop:product', args=(self.slug,))
+
+    def save(self, *args, **kwargs):
+        slug = self._random_slug(4)
+        while Product.objects.filter(slug=slug).exists():
+            slug = self._random_slug(4)
+        self.slug = slug
+        return super().save(*args, **kwargs)
+
+    @staticmethod
+    def _random_slug(length: int) -> str:
+        return "".join(choices(ascii_letters, k=length))
+
+    def __str__(self) -> str:
+        return self.name
 
     class Meta:
         ordering = ('-created_time',)
@@ -40,17 +66,28 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE
+    )
     image = models.ImageField(
         _("Images"),
         upload_to="images/product/%Y/%m/%d",
-        blank=True
+        blank=True,
     )
+
+    def __str__(self) -> str:
+        return self.image.url
 
 
 class Order(models.Model):
-    customer: User = models.ForeignKey(User, on_delete=models.CASCADE)
-    order_time = models.DateTimeField(auto_now_add=True)
+    customer: User = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+    order_time = models.DateTimeField(
+        auto_now_add=True,
+    )
 
     def __str__(self) -> str:
         return f"{self.customer.username}'s order"
@@ -62,10 +99,19 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
+    order = models.ForeignKey(
+        Order,
+        on_delete=models.CASCADE,
+    )
+    product = models.ForeignKey(
+        Product,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
     product_price = models.IntegerField()
-    product_count = models.PositiveIntegerField(default=1)
+    product_count = models.PositiveIntegerField(
+        default=1,
+    )
     product_cost = models.IntegerField()
 
     def __str__(self) -> str:
@@ -77,8 +123,14 @@ class OrderItem(models.Model):
 
 
 class Invoice(models.Model):
-    order = models.ForeignKey(Order, null=True, on_delete=models.SET_NULL)
-    invoice_time = models.DateTimeField(auto_now_add=True)
+    order = models.ForeignKey(
+        Order,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
+    invoice_time = models.DateTimeField(
+        auto_now_add=True,
+    )
     authority = models.CharField(
         max_length=36,
         blank=True,
@@ -100,13 +152,19 @@ class Transaction(models.Model):
         PENDING = _('pending')
         FAILED = _('failed')
         COMPLETED = _('completed')
-    invoice = models.ForeignKey(Invoice, null=True, on_delete=models.SET_NULL)
-    transaction_time = models.DateTimeField(auto_now_add=True)
+    invoice = models.ForeignKey(
+        Invoice,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
+    transaction_time = models.DateTimeField(
+        auto_now_add=True,
+    )
     amount = models.IntegerField()
     status = models.CharField(
         max_length=12,
         choices=Status.choices,
-        default='pending'
+        default='pending',
     )
 
     def __str__(self) -> str:
