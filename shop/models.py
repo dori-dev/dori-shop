@@ -29,7 +29,8 @@ class Product(models.Model):
     )
     image = models.ImageField(
         upload_to='images/product/%Y/%m/%d',
-        blank=True,
+        blank=False,
+        null=False,
     )
     price = models.IntegerField()
     rate = models.FloatField(
@@ -49,10 +50,11 @@ class Product(models.Model):
         return reverse('shop:product', args=(self.slug,))
 
     def save(self, *args, **kwargs):
-        slug = self._random_slug(4)
-        while Product.objects.filter(slug=slug).exists():
+        if not self.slug:
             slug = self._random_slug(4)
-        self.slug = slug
+            while Product.objects.filter(slug=slug).exists():
+                slug = self._random_slug(4)
+            self.slug = slug
         return super().save(*args, **kwargs)
 
     @staticmethod
