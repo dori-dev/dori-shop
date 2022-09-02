@@ -161,11 +161,7 @@
                         <span>{{ product.price }} تومان</span>
                       </h4>
                       <div class="product-rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
+                        {{ product.get_rating|generate_rate|safe }}
                       </div>
                       <div class="product-btns">
                         <button class="add-to-wishlist">

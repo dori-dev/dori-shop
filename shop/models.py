@@ -16,9 +16,19 @@ class Product(models.Model):
         blank=True
     )
     price = models.IntegerField()
+    rate = models.FloatField(default=5)
 
     def __str__(self) -> str:
         return self.name
+
+    def get_rating(self):
+        INCREASER = 0.2
+        rate = round(self.rate+INCREASER, 1)
+        stars = int(rate // 1)
+        float_rate = round(rate - stars, 1)
+        half_stars = int(float_rate // 0.5)
+        empty_stars = int(5 - (stars + (half_stars / 2)))
+        return stars, half_stars, empty_stars
 
     def get_absolute_url(self):
         return reverse('shop:product', args=(self.id,))
