@@ -12,7 +12,7 @@ def add_comma(number: int) -> str:
     return f"{number:,}".replace(',', '،')
 
 
-def generate_rate(rating_info: tuple) -> str:
+def generate_rating(rating_info: tuple) -> str:
     stars, half_stars, empty_stars = rating_info
     html = '<i class="fa fa-star-o"></i>\n'*empty_stars
     html += '<i class="fa fa-star-half-o"></i>\n'*half_stars
@@ -22,4 +22,4 @@ def generate_rate(rating_info: tuple) -> str:
 
 register.filter("chunks", chunks)
 register.filter("comma", add_comma)
-register.filter("generate_rate", generate_rate)
+register.filter("generate_rating", generate_rating)

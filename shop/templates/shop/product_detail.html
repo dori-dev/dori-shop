@@ -457,58 +457,11 @@
         </div>
       </div>
       {% for product in related_products %}
-      <!-- product -->
-      <div class="col-md-3 col-xs-6">
-        <div class="product">
-          <div class="product-img">
-            <a href="{{ product.get_absolute_url }}">
-              <img src="{{ product.image.url }}" alt="" />
-            </a>
-            <div class="product-label ltr">
-              <span class="sale">-30%</span>
-              <span class="new">جدید</span>
-            </div>
-          </div>
-          <div class="product-body">
-            <!-- TODO add category to product -->
-            <p class="product-category">دسته بندی</p>
-            <h3 class="product-name">
-              <!-- TODO add slug to product -->
-              <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-            </h3>
-            <h4 class="product-price">
-              <!-- TODO add discount to product -->
-              <del class="product-old-price">3،000،000 تومان</del>
-              <br />
-              <span>{{ product.price }} تومان</span>
-            </h4>
-            <div class="product-rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
-            <div class="product-btns">
-              <button class="add-to-wishlist">
-                <i class="fa fa-heart-o"></i
-                ><span class="tooltipp">اضافه کردن به علاقه مندی ها</span>
-              </button>
-              <button class="quick-view">
-                <i class="fa fa-eye"></i>
-                <span class="tooltipp"> دیدن محصول </span>
-              </button>
-            </div>
-          </div>
-          <div class="add-to-cart">
-            <button class="add-to-cart-btn">
-              <i class="fa fa-shopping-cart"></i>
-              افزودن به سبد خرید
-            </button>
-          </div>
+        <!-- product -->
+        <div class="col-md-3 col-xs-6">
+          {% include 'shop/product.html' %}
         </div>
-      </div>
-      <!-- /product -->
+        <!-- /product -->
       {% endfor %}
     </div>
     <!-- /row -->

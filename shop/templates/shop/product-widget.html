@@ -1,0 +1,17 @@
+<div class="product-widget">
+  <a href="{{ product.get_absolute_url }}">
+    <div class="product-img">
+      <img src="{{ product.image.url }}" alt="" />
+    </div>
+    <div class="product-body">
+      <p class="product-category">دسته بندی</p>
+      <h3 class="product-name">
+        <a href="{{ product.get_absolute_url }}"> {{ product.name }} </a>
+      </h3>
+      <h4 class="product-price">
+        <del class="product-old-price">3،000،000 تومان</del>
+        <span>{{ product.price }} تومان</span>
+      </h4>
+    </div>
+  </a>
+</div>

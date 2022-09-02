@@ -136,54 +136,7 @@
             <div id="tab1" class="tab-pane active">
               <div class="products-slick" data-nav="#slick-nav-1">
                 {% for product in latest_products %}
-                  <!-- product -->
-                  <div class="product">
-                    <div class="product-img">
-                      <a href="{{ product.get_absolute_url }}">
-                        <img src="{{ product.image.url }}" alt="" />
-                      </a>
-                      <div class="product-label ltr">
-                        <span class="sale">-30%</span>
-                        <span class="new">جدید</span>
-                      </div>
-                    </div>
-                    <div class="product-body">
-                      <!-- TODO add category to product -->
-                      <p class="product-category">دسته بندی</p>
-                      <h3 class="product-name">
-                        <!-- TODO add slug to product -->
-                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-                      </h3>
-                      <h4 class="product-price">
-                        <!-- TODO add discount to product -->
-                        <del class="product-old-price">3،000،000 تومان</del>
-                        <br>
-                        <span>{{ product.price }} تومان</span>
-                      </h4>
-                      <div class="product-rating">
-                        {{ product.get_rating|generate_rate|safe }}
-                      </div>
-                      <div class="product-btns">
-                        <button class="add-to-wishlist">
-                          <i class="fa fa-heart-o"></i
-                          ><span class="tooltipp">اضافه کردن به علاقه مندی ها</span>
-                        </button>
-                        <button class="quick-view">
-                          <i class="fa fa-eye"></i>
-                          <span class="tooltipp">
-                            دیدن محصول
-                          </span>
-                        </button>
-                      </div>
-                    </div>
-                    <div class="add-to-cart">
-                      <button class="add-to-cart-btn">
-                        <i class="fa fa-shopping-cart"></i>
-                         افزودن به سبد خرید
-                      </button>
-                    </div>
-                  </div>
-                  <!-- /product -->
+                    {% include 'shop/product.html' %}
                 {% endfor %}
               </div>
               <div id="slick-nav-1" class="products-slick-nav"></div>
@@ -278,59 +231,8 @@
             <div id="tab2" class="tab-pane fade in active">
               <div class="products-slick" data-nav="#slick-nav-2">
                 {% for product in best_selling_products %}
-                  <!-- product -->
-                  <div class="product">
-                    <div class="product-img">
-                      <a href="{{ product.get_absolute_url }}">
-                        <img src="{{ product.image.url }}" alt="" />
-                      </a>
-                      <div class="product-label ltr">
-                        <span class="sale">-15%</span>
-                        <span class="new">برتر</span>
-                      </div>
-                    </div>
-                    <div class="product-body">
-                      <!-- TODO add category to product -->
-                      <p class="product-category">دسته بندی</p>
-                      <h3 class="product-name">
-                        <!-- TODO add slug to product -->
-                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-                      </h3>
-                      <h4 class="product-price">
-                        <!-- TODO add discount to product -->
-                        <del class="product-old-price">3،000،000 تومان</del>
-                        <br>
-                        <span>{{ product.price }} تومان</span>
-                      </h4>
-                      <div class="product-rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <div class="product-btns">
-                        <button class="add-to-wishlist">
-                          <i class="fa fa-heart-o"></i
-                          ><span class="tooltipp">اضافه کردن به علاقه مندی ها</span>
-                        </button>
-                        <button class="quick-view">
-                          <i class="fa fa-eye"></i>
-                          <span class="tooltipp">
-                            دیدن محصول
-                          </span>
-                        </button>
-                      </div>
-                    </div>
-                    <div class="add-to-cart">
-                      <button class="add-to-cart-btn">
-                        <i class="fa fa-shopping-cart"></i>
-                        افزودن به سبد خرید
-                      </button>
-                    </div>
-                </div>
-                <!-- /product -->
-              {% endfor %}
+                    {% include 'shop/product.html' %}
+                {% endfor %}
               </div>
               <div id="slick-nav-2" class="products-slick-nav"></div>
             </div>
@@ -364,25 +266,7 @@
           {% for products in best_selling_products|chunks:3 %}
             <div>
               {% for product in products %}
-                <div class="product-widget">
-                  <a href="{{ product.get_absolute_url }}">
-                    <div class="product-img">
-                      <img src="{{ product.image.url }}" alt="" />
-                    </div>
-                    <div class="product-body">
-                      <p class="product-category">دسته بندی</p>
-                      <h3 class="product-name">
-                        <a href="{{ product.get_absolute_url }}">
-                          {{ product.name }}
-                        </a>
-                      </h3>
-                      <h4 class="product-price">
-                        <del class="product-old-price">3،000،000 تومان</del>
-                        <span>{{ product.price }} تومان</span>
-                      </h4>
-                    </div>
-                  </a>
-                </div>
+                {% include 'shop/product-widget.html' %}
               {% endfor %}
             </div>
           {% endfor %}
@@ -400,25 +284,7 @@
           {% for products in best_selling_products|chunks:3 %}
           <div>
             {% for product in products %}
-              <div class="product-widget">
-                <a href="{{ product.get_absolute_url }}">
-                  <div class="product-img">
-                    <img src="{{ product.image.url }}" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category">دسته بندی</p>
-                    <h3 class="product-name">
-                      <a href="{{ product.get_absolute_url }}">
-                        {{ product.name }}
-                      </a>
-                    </h3>
-                    <h4 class="product-price">
-                      <del class="product-old-price">3،000،000 تومان</del>
-                      <span>{{ product.price }} تومان</span>
-                    </h4>
-                  </div>
-                </a>
-              </div>
+              {% include 'shop/product-widget.html' %}
             {% endfor %}
           </div>
         {% endfor %}
@@ -438,25 +304,7 @@
           {% for products in latest_products|chunks:3 %}
             <div>
               {% for product in products %}
-                <div class="product-widget">
-                  <a href="{{ product.get_absolute_url }}">
-                    <div class="product-img">
-                      <img src="{{ product.image.url }}" alt="" />
-                    </div>
-                    <div class="product-body">
-                      <p class="product-category">دسته بندی</p>
-                      <h3 class="product-name">
-                        <a href="{{ product.get_absolute_url }}">
-                          {{ product.name }}
-                        </a>
-                      </h3>
-                      <h4 class="product-price">
-                        <del class="product-old-price">3،000،000 تومان</del>
-                        <span>{{ product.price }} تومان</span>
-                      </h4>
-                    </div>
-                  </a>
-                </div>
+                {% include 'shop/product-widget.html' %}
               {% endfor %}
             </div>
           {% endfor %}
