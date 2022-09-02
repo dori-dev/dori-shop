@@ -37,6 +37,7 @@ class Product(models.Model):
     )
     rate = models.FloatField(
         default=5,
+        max_length=5,
     )
     stock_count = models.PositiveIntegerField(
         default=10,
