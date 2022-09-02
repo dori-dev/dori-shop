@@ -16,6 +16,3 @@ Comments
 Search
 Blog
 Accounts and Registration
-Related Product
-Product Buy Count
-Available Count
