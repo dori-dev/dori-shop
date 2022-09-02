@@ -32,9 +32,14 @@ class Product(models.Model):
         blank=False,
         null=False,
     )
-    price = models.IntegerField()
+    price = models.IntegerField(
+        default=10_000,
+    )
     rate = models.FloatField(
         default=5,
+    )
+    available_count = models.IntegerField(
+        default=10,
     )
 
     def get_rating(self):
@@ -157,6 +162,7 @@ class Transaction(models.Model):
         PENDING = _('pending')
         FAILED = _('failed')
         COMPLETED = _('completed')
+
     invoice = models.ForeignKey(
         Invoice,
         null=True,
