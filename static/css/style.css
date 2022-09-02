@@ -417,14 +417,14 @@ select.category {
 }
 
 #breadcrumb .breadcrumb-tree li+li {
-  margin-left: 10px;
+  margin-right: 10px;
 }
 
 #breadcrumb .breadcrumb-tree li+li:before {
   content: "/";
   display: inline-block;
   color: #8d99ae;
-  margin-right: 10px;
+  margin-left: 10px;
 }
 
 #breadcrumb .breadcrumb-tree li a {
@@ -776,13 +776,13 @@ select.category {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0px;
+  right: 0px;
   width: 60%;
   background: #d10024;
   opacity: 0.9;
-  -webkit-transform: skewX(-45deg);
-  -ms-transform: skewX(-45deg);
-  transform: skewX(-45deg);
+  -webkit-transform: skewX(45deg);
+  -ms-transform: skewX(45deg);
+  transform: skewX(45deg);
 }
 
 .shop:after {
@@ -790,13 +790,13 @@ select.category {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 1px;
+  right: 0;
   width: 100%;
   background: #d10024;
   opacity: 0.9;
-  -webkit-transform: skewX(-45deg) translateX(-100%);
-  -ms-transform: skewX(-45deg) translateX(-100%);
-  transform: skewX(-45deg) translateX(-100%);
+  -webkit-transform: skewX(45deg) translateX(100%);
+  -ms-transform: skewX(45deg) translateX(100%);
+  transform: skewX(45deg) translateX(100%);
 }
 
 .shop .shop-img {
@@ -827,17 +827,10 @@ select.category {
 
 .shop .shop-body h3 {
   color: #fff;
-  text-shadow: 0.4px 0 0 #000, -0.4px 0 0 #000, 0 0.4px 0 #000, 0 -0.4px 0 #000,
-    0.4px 0.4px #000, -0.4px -0.4px 0 #000, 0.5px -0.5px 0 #000,
-    -0.5px 0.5px 0 #000;
 }
 
 .shop .shop-body .cta-btn {
   color: #fff;
-  text-shadow: 0.4px 0 0 #000, -0.4px 0 0 #000, 0 0.4px 0 #000, 0 -0.4px 0 #000,
-    0.4px 0.4px #000, -0.4px -0.4px 0 #000, 0.5px -0.5px 0 #000,
-    -0.5px 0.5px 0 #000;
-  text-transform: uppercase;
 }
 
 /*=========================================================
@@ -889,7 +882,7 @@ select.category {
 
 .hot-deal .hot-deal-countdown>li>div span {
   display: block;
-  font-size: 10px;
+  font-size: 14px;
   text-transform: uppercase;
   color: #fff;
 }
@@ -1008,12 +1001,8 @@ select.category {
   width: 14px;
   margin-right: -4px;
   background: #fff;
-  color: #e4e7ed;
-  z-index: 10;
-}
-
-.product .product-body .product-rating>i.fa-star {
   color: #ef233c;
+  z-index: 10;
 }
 
 .product .product-body .product-rating:after {
@@ -1995,6 +1984,7 @@ select.category {
 ===========================================================*/
 
 #newsletter.section {
+  overflow: hidden;
   border-top: 2px solid #e4e7ed;
   border-bottom: 3px solid #d10024;
   margin-top: 30px;
@@ -2296,4 +2286,16 @@ select.category {
     float: none;
     margin-top: 10px;
   }
+}
+
+.order-img {
+  width: 200px;
+}
+
+.order-img a img {
+  width: 100%;
+}
+
+.cart {
+  max-width: 100% !important;
 }

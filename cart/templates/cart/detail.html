@@ -1,69 +1,70 @@
 {% extends 'base.html' %}
+{% load product %}
 
-{% block title %}Shopping Cart{% endblock title %}
+{% block title %}سبد خرید{% endblock title %}
 
 {% block content %}
-<h1>Your Shopping Cart</h1>
+<h2>سبد خرید شما</h2>
 
-<table class="cart">
+<table class="cart table table-responsive table-bordered">
   <thead>
     <tr>
-      <th>Image</th>
-      <th>Product</th>
-      <th>Count</th>
-      <th>Remove</th>
-      <th>Unit Price</th>
-      <th>Price</th>
+      <th scope="col" class="text-center">تصویر</th>
+      <th scope="col" class="text-center">محصول</th>
+      <th scope="col" class="text-center">تعداد</th>
+      <th scope="col" class="text-center">حذف</th>
+      <th scope="col" class="text-center">قیمت هر کدام</th>
+      <th scope="col" class="text-center">قیمت کل</th>
     </tr>
   </thead>
   <tbody>
     {% for item in cart %}
       {% with product=item.product %}
         <tr>
-          <td>
-            <a href="{{ product.get_absolute_url }}">
-              <img src="{{ product.image.url }}" alt="" />
-            </a>
+          <td class="order-img text-center">
+              <a href="{{ product.get_absolute_url }}">
+                <img src="{{ product.image.url }}" alt="" />
+              </a>
           </td>
-          <td>{{ product.name }}</td>
-          <td>
+          <td class="text-center">{{ product.name }}</td>
+          <td class="text-center">
             <form action="{% url 'cart:cart_add' product.id %}" method="post">
               {% csrf_token %}
               {{ item.update_product_count_form.product_count }}
               {{ item.update_product_count_form.update }}
-              <input type="submit" value="Update" />
+              <input type="submit" value="آپدیت" />
             </form>
           </td>
-          <td>
+          <td class="text-center">
             <a href="{% url 'cart:cart_remove' product.id %}">
-              Remove
+              حذف
             </a>
           </td>
-          <td class="num">
-            ${{ item.price }}
+          <td class="num text-center">
+            {{ item.price|comma }} تومان
           </td>
-          <td class="num">
-            ${{ item.total_price }}
+          <td class="num text-center">
+            {{ item.total_price|comma }} تومان
           </td>
         </tr>
       {% endwith %}
     {% endfor %}
     <tr class="total">
-      <td>Total</td>
+      <td>قیمت کل</td>
       <td colspan="4"></td>
       <!-- TODO clear and total count -->
       <td class="num">
-        ${{ cart.get_total_price }}
+        {{ cart.get_total_price|comma }} تومان
       </td>
     </tr>
   </tbody>
 </table>
 <p class="text-right">
-  <a href="{% url 'shop:store' %}" class="button light">
-    Continue Shopping
+  <a href="{% url 'shop:store' %}" class="button light add-to-cart-btn">
+    ادامه دادن به خرید
   </a>
   <a href="{% url 'shop:checkout' %}" class="button light">
-    Checkout
+    تصویه حساب
   </a>
 </p>
 {% endblock content %}

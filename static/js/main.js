@@ -54,7 +54,7 @@
     $this.slick({
       infinite: true,
       autoplay: true,
-      speed: 300,
+      speed: 500,
       dots: false,
       arrows: false,
       rtl: true,
@@ -69,6 +69,7 @@
     dots: false,
     arrows: true,
     fade: true,
+    rtl: true,
     asNavFor: "#product-imgs",
   });
 
