@@ -41,6 +41,9 @@ class Product(models.Model):
     stock_count = models.PositiveIntegerField(
         default=10,
     )
+    sales = models.PositiveIntegerField(
+        default=0,
+    )
 
     def get_rating(self):
         INCREASER = 0.2

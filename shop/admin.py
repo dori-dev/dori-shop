@@ -62,6 +62,33 @@ class StockFilter(admin.SimpleListFilter):
             )
 
 
+class SalesFilter(admin.SimpleListFilter):
+    title = 'Sales'
+    parameter_name = 'sales'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('low', 'less than 50 sales'),
+            ('normal', 'less than 1000 sales'),
+            ('many', 'greater than 1000 sales')
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'low':
+            return queryset.filter(
+                sales__lt=50,
+            )
+        if self.value() == 'normal':
+            return queryset.filter(
+                sales__range=(50, 1000),
+            )
+        if self.value() == 'many':
+            return queryset.filter(
+                sales__gt=1000,
+            )
+
+
+@admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
     fieldsets = [
         (
@@ -92,6 +119,7 @@ class ProductAdmin(admin.ModelAdmin):
                 'fields': [
                     'price',
                     'rate',
+                    'sales',
                     'stock_count',
                 ]
             }
@@ -105,12 +133,14 @@ class ProductAdmin(admin.ModelAdmin):
         'image_',
         'price_',
         'rate',
+        'sales',
         'stock_count',
     )
 
     list_filter = (
         # 'category',
         PriceFilter,
+        SalesFilter,
         StockFilter,
     )
     search_fields = (
@@ -119,8 +149,7 @@ class ProductAdmin(admin.ModelAdmin):
         'description',
         'details',
     )
-    date_hierarchy = 'created_time'
-
+    date_hierarchy = 'updated_time'
     inlines = (ProductImageAdmin,)
 
     def link(self, model: models.Product):
@@ -144,30 +173,42 @@ class ProductAdmin(admin.ModelAdmin):
         return updated_time.strftime('%b %d, %I:%M %p')
 
 
+@admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'customer', 'order_time')
+    list_display = (
+        'id',
+        'customer',
+        'order_time',
+    )
 
 
+@admin.register(models.OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'order', 'product',
-        'product_price', 'product_count', 'product_cost'
+        'id',
+        'order',
+        'product',
+        'product_price',
+        'product_count',
+        'product_cost',
     )
 
 
+@admin.register(models.Invoice)
 class InvoiceAdmin(admin.ModelAdmin):
-    list_display = ('id', 'order', 'invoice_time')
+    list_display = (
+        'id',
+        'order',
+        'invoice_time',
+    )
 
 
+@admin.register(models.Transaction)
 class TransactionAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'invoice', 'amount',
-        'transaction_time', 'status'
+        'id',
+        'invoice',
+        'amount',
+        'transaction_time',
+        'status',
     )
-
-
-admin.site.register(models.Product, ProductAdmin)
-admin.site.register(models.Order, OrderAdmin)
-admin.site.register(models.OrderItem, OrderItemAdmin)
-admin.site.register(models.Invoice, InvoiceAdmin)
-admin.site.register(models.Transaction, TransactionAdmin)
