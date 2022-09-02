@@ -16,3 +16,4 @@ Comments
 Search
 Blog
 Accounts and Registration
+Add Buy Count to Product
