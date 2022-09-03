@@ -7,12 +7,18 @@ from . import models
 from shop.models import Product
 
 
-class AdminProductComment(admin.ModelAdmin):
-    list_display = ()
+@admin.action(description='Confirm selected product comments')
+def confirm_product_comments(modeladmin, request, queryset):
+    queryset.update(confirmed=True)
+
+
+@admin.action(description='Un confirm selected product comments')
+def un_confirm_product_comments(modeladmin, request, queryset):
+    queryset.update(confirmed=False)
 
 
 @admin.register(models.ProductComment)
-class ProductAdmin(admin.ModelAdmin):
+class AdminProductComment(admin.ModelAdmin):
     fieldsets = [
         (
             None, {
@@ -40,12 +46,12 @@ class ProductAdmin(admin.ModelAdmin):
         ),
     ]
     list_display = (
-        "user",
-        "product_",
-        "email",
-        "rate",
-        "send_at_",
-        "confirmed",
+        'user',
+        'product_',
+        'email',
+        'rate',
+        'send_at_',
+        'confirmed',
     )
 
     list_filter = (
@@ -61,6 +67,10 @@ class ProductAdmin(admin.ModelAdmin):
     raw_id_fields = (
         'user',
         'product',
+    )
+    actions = (
+        confirm_product_comments,
+        un_confirm_product_comments,
     )
     date_hierarchy = 'send_at'
 

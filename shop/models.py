@@ -5,8 +5,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-
 from tinymce.models import HTMLField
+
+from comments.models import ProductComment
 
 
 class Product(models.Model):
@@ -58,12 +59,22 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('shop:product', args=(self.slug,))
 
+    def allow_to_send_comment(self, user) -> bool:
+        return not ProductComment.objects.filter(
+            user=user,
+            product=self,
+        ).exists()
+
     def save(self, *args, **kwargs):
         if not self.slug:
             slug = self._random_slug(4)
             while Product.objects.filter(slug=slug).exists():
                 slug = self._random_slug(4)
             self.slug = slug
+        if self.rate > 5:
+            self.rate = 5
+        if self.rate < 0:
+            self.rate = 0
         return super().save(*args, **kwargs)
 
     @staticmethod
