@@ -31,7 +31,6 @@ class AdminProductComment(admin.ModelAdmin):
         (
             'Details', {
                 'fields': [
-                    'email',
                     'body',
                     'rate',
                 ]
@@ -48,7 +47,6 @@ class AdminProductComment(admin.ModelAdmin):
     list_display = (
         'user',
         'product_',
-        'email',
         'rate',
         'send_at_',
         'confirmed',

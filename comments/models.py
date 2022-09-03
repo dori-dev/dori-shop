@@ -12,10 +12,9 @@ class ProductComment(models.Model):
         User,
         on_delete=models.CASCADE,
     )
-    email = models.EmailField()
     body = models.TextField()
-    rate = models.FloatField(
-        max_length=5,
+    rate = models.PositiveSmallIntegerField(
+        default=5,
     )
     send_at = models.DateTimeField(
         auto_now_add=True,

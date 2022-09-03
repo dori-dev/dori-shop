@@ -1,0 +1,37 @@
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-6">
+      <div id="review-form">
+        <form
+          action="{% url 'comment:product' product.id %}"
+          class="review-form"
+          method="post"
+        >
+          {{ comment_form.body }}
+          <div class="input-rating">
+            <span>امتیاز شما: </span>
+            <div class="stars">
+              <input id="star5" name="rate" value="5" type="radio" /><label
+                for="star5"
+              ></label>
+              <input id="star4" name="rate" value="4" type="radio" /><label
+                for="star4"
+              ></label>
+              <input id="star3" name="rate" value="3" type="radio" /><label
+                for="star3"
+              ></label>
+              <input id="star2" name="rate" value="2" type="radio" /><label
+                for="star2"
+              ></label>
+              <input id="star1" name="rate" value="1" type="radio" /><label
+                for="star1"
+              ></label>
+            </div>
+          </div>
+          <button class="primary-btn">ارسال</button>
+          {% csrf_token %}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 from decimal import Decimal
+
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -6,9 +7,12 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.core.handlers.wsgi import WSGIRequest
 from zeep import Client
+
+
+from . import models
 from cart.forms import CartAddProductForm
 from cart.cart import Cart
-from . import models
+from comments.forms import ProductCommentForm
 
 
 merchant_code = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
@@ -24,14 +28,19 @@ def index(request):
     return render(request, 'shop/index.html', context)
 
 
-def product_detail(request, slug: str):
-    product_object = get_object_or_404(models.Product, slug=slug)
-    form = CartAddProductForm()
+def product_detail(request: WSGIRequest, slug: str):
+    product = get_object_or_404(models.Product, slug=slug)
+    if request.user.is_authenticated and \
+            product.allow_to_send_comment(request.user):
+        comment_form = ProductCommentForm()
+    else:
+        comment_form = None
     related_products = models.Product.objects.all()[:4]
     context = {
-        'product': product_object,
-        'form': form,
+        'product': product,
+        'form': CartAddProductForm(),
         'related_products': related_products,
+        'comment_form': comment_form,
     }
     return render(request, 'shop/product-detail.html', context)
 
