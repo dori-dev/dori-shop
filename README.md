@@ -4,6 +4,7 @@ The modern shop created with Django and PostgreSQL.
 
 # Developing ...
 
+- [ ] Persian Website
 - [ ] New, Hot, Wish Labels
 - [ ] Discount
 - [ ] Category
@@ -20,9 +21,9 @@ The modern shop created with Django and PostgreSQL.
 - [ ] Wish Product
 - [ ] Diff between product name and product title, unique product title and shorten than product name
 - [ ] title from max length 60
-- [ ] <meta name="description" content="" />
+- [ ] meta description
 - [ ] use short_description for this and use CharField with max length 300 min 160
-- [ ] <link rel="canonical" href="https://example.com/c/OYpq" />
+- [ ] link rel canonical
 - [ ] set alt for all image in website from 50 char to 16 words
 - [ ] use og meta tags for your site
 - [ ] Generate sitemap and robots.txt
