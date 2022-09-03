@@ -33,7 +33,7 @@ def product_detail(request, slug: str):
         'form': form,
         'related_products': related_products,
     }
-    return render(request, 'shop/product_detail.html', context)
+    return render(request, 'shop/product-detail.html', context)
 
 
 def store(request):
