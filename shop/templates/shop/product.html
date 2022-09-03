@@ -10,9 +10,7 @@
       />
     </a>
     <div class="product-label ltr">
-      <span class="sale">
-        -30%
-      </span>
+      <span class="sale"> -30% </span>
       <span class="new">جدید</span>
     </div>
   </div>
@@ -34,17 +32,16 @@
       {{ product.get_rating|generate_rating|safe }}
     </div>
     <div class="product-btns">
-      <a class="add-to-wishlist">
+      <a
+        class="add-to-wishlist"
+        href="{% url 'shop:wish' product.id %}?next={{ request.path }}"
+      >
         <i class="fa fa-heart-o"></i>
-        <span class="tooltipp">
-          اضافه کردن به علاقه مندی ها
-        </span>
+        <span class="tooltipp"> اضافه کردن به علاقه مندی ها </span>
       </a>
       <a class="quick-view" href="{{ product.get_absolute_url }}">
         <i class="fa fa-eye"></i>
-        <span class="tooltipp">
-          دیدن محصول
-        </span>
+        <span class="tooltipp"> دیدن محصول </span>
       </a>
     </div>
   </div>

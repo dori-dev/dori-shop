@@ -132,7 +132,7 @@
 
           <ul class="product-btns">
             <li>
-              <a href="#"
+              <a href="{% url 'shop:wish' product.id %}?next={{ request.path }}"
                 ><i class="fa fa-heart-o"></i>
                 افزودن به علاقه مندی ها
               </a>

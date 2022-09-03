@@ -173,6 +173,14 @@ class ProductAdmin(admin.ModelAdmin):
         return updated_time.strftime('%b %d, %I:%M %p')
 
 
+@admin.register(models.WishProduct)
+class WishProductAdmin(admin.ModelAdmin):
+    list_display = (
+        'product',
+        'user',
+    )
+
+
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = (

@@ -47,6 +47,23 @@ def product_detail(request: WSGIRequest, slug: str):
     return render(request, 'shop/product-detail.html', context)
 
 
+@login_required
+def wish_product(request: WSGIRequest, pk: int):
+    redirect_to = request.GET.get('next')
+    product = get_object_or_404(models.Product, pk=pk)
+    exists = models.WishProduct.objects.filter(
+        product=product, user=request.user
+    ).exists()
+    if exists is False:
+        models.WishProduct.objects.create(
+            product=product,
+            user=request.user,
+        )
+    if redirect_to is None:
+        return redirect('shop:index')
+    return redirect(redirect_to)
+
+
 def store(request):
     return render(request, 'shop/store.html')
 

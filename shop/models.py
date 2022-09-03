@@ -93,7 +93,7 @@ class Product(models.Model):
 class ProductImage(models.Model):
     product = models.ForeignKey(
         Product,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
     )
     image = models.ImageField(
         _("Images"),
@@ -103,6 +103,17 @@ class ProductImage(models.Model):
 
     def __str__(self) -> str:
         return self.image.url
+
+
+class WishProduct(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
 
 
 class Order(models.Model):
