@@ -10,7 +10,9 @@
       />
     </a>
     <div class="product-label ltr">
-      <span class="sale">-30%</span>
+      <span class="sale">
+        -30%
+      </span>
       <span class="new">جدید</span>
     </div>
   </div>
@@ -18,10 +20,7 @@
     <!-- TODO add category to product -->
     <p class="product-category">دسته بندی</p>
     <h3 class="product-name">
-      <a
-        href="{{ product.get_absolute_url }}"
-        title="{{ product.name }}"
-      >
+      <a href="{{ product.get_absolute_url }}" title="{{ product.name }}">
         {{ product.name }}
       </a>
     </h3>
@@ -35,14 +34,18 @@
       {{ product.get_rating|generate_rating|safe }}
     </div>
     <div class="product-btns">
-      <button class="add-to-wishlist">
-        <i class="fa fa-heart-o"></i
-        ><span class="tooltipp">اضافه کردن به علاقه مندی ها</span>
-      </button>
-      <button class="quick-view">
+      <a class="add-to-wishlist">
+        <i class="fa fa-heart-o"></i>
+        <span class="tooltipp">
+          اضافه کردن به علاقه مندی ها
+        </span>
+      </a>
+      <a class="quick-view" href="{{ product.get_absolute_url }}">
         <i class="fa fa-eye"></i>
-        <span class="tooltipp"> دیدن محصول </span>
-      </button>
+        <span class="tooltipp">
+          دیدن محصول
+        </span>
+      </a>
     </div>
   </div>
   <div class="add-to-cart">

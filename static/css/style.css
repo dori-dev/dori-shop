@@ -1018,7 +1018,7 @@ select.category {
   background-color: #e4e7ed;
 }
 
-.product .product-body .product-btns>button {
+.product .product-body .product-btns>a {
   position: relative;
   width: 40px;
   height: 40px;
@@ -1029,13 +1029,17 @@ select.category {
   transition: 0.2s all;
 }
 
-.product .product-body .product-btns>button:hover {
+.product .product-body .product-btns>a+a {
+  margin-right: 15px;
+}
+
+.product .product-body .product-btns>a:hover {
   background-color: #e4e7ed;
   color: #d10024;
   border-radius: 50%;
 }
 
-.product .product-body .product-btns>button .tooltipp {
+.product .product-body .product-btns>a .tooltipp {
   position: absolute;
   bottom: 100%;
   left: 50%;
@@ -1056,7 +1060,7 @@ select.category {
   transition: 0.2s all;
 }
 
-.product .product-body .product-btns>button:hover .tooltipp {
+.product .product-body .product-btns>a:hover .tooltipp {
   opacity: 1;
   visibility: visible;
   -webkit-transform: translate(-50%, -5px);

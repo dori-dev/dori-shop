@@ -93,13 +93,8 @@
           <h2 class="product-name">{{ product.name }}</h2>
           <div>
             <div class="product-rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star-o"></i>
+              {{ product.get_rating|generate_rating|safe }}
             </div>
-            <a class="review-link" href="#">۱۰ نظر | افزودن نظر</a>
           </div>
           <div>
             <h3 class="product-price">
@@ -178,7 +173,7 @@
               <a data-toggle="tab" href="#tab1">توضیحات</a>
             </li>
             <li><a data-toggle="tab" href="#tab2">جزئیات</a></li>
-            <li><a data-toggle="tab" href="#tab3">نظرات (3)</a></li>
+            <li><a data-toggle="tab" href="#tab3">نظرات ({{ comment|length }})</a></li>
           </ul>
           <!-- /product tab nav -->
 
