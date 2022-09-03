@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load product %}
 
 {% block title %}{{ product.name}}{% endblock title %}
 
@@ -221,66 +222,23 @@
                 <div class="col-md-12">
                   <div id="reviews">
                     <ul class="reviews">
+                      {% for comment in comments %}
                       <li>
                         <div class="review-heading">
-                          <h5 class="name">John</h5>
-                          <p class="date">27 DEC 2018, 8:0 PM</p>
+                          <h5 class="name">{{ comment.user.username }}</h5>
+                          <!-- TODO use jalali date time -->
+                          <p class="date">{{ comment.send_at }}</p>
                           <div class="review-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o empty"></i>
+                            {{ comment.get_rating|generate_rating|safe }}
                           </div>
                         </div>
                         <div class="review-body">
                           <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua
+                            {{ comment.body }}
                           </p>
                         </div>
                       </li>
-                      <li>
-                        <div class="review-heading">
-                          <h5 class="name">John</h5>
-                          <p class="date">27 DEC 2018, 8:0 PM</p>
-                          <div class="review-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o empty"></i>
-                          </div>
-                        </div>
-                        <div class="review-body">
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua
-                          </p>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="review-heading">
-                          <h5 class="name">John</h5>
-                          <p class="date">27 DEC 2018, 8:0 PM</p>
-                          <div class="review-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o empty"></i>
-                          </div>
-                        </div>
-                        <div class="review-body">
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua
-                          </p>
-                        </div>
-                      </li>
+                      {% endfor %}
                     </ul>
                     <ul class="reviews-pagination">
                       <li class="active">1</li>

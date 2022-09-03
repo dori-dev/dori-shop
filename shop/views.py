@@ -30,17 +30,19 @@ def index(request):
 
 def product_detail(request: WSGIRequest, slug: str):
     product = get_object_or_404(models.Product, slug=slug)
+    related_products = models.Product.objects.all()[:4]
     if request.user.is_authenticated and \
             product.allow_to_send_comment(request.user):
         comment_form = ProductCommentForm()
     else:
         comment_form = None
-    related_products = models.Product.objects.all()[:4]
+    comments = product.comments.filter(confirmed=True)
     context = {
         'product': product,
         'form': CartAddProductForm(),
         'related_products': related_products,
         'comment_form': comment_form,
+        'comments': comments,
     }
     return render(request, 'shop/product-detail.html', context)
 

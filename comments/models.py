@@ -23,6 +23,11 @@ class ProductComment(models.Model):
         default=False,
     )
 
+    def get_rating(self):
+        stars = self.rate
+        empty_stars = 5 - stars
+        return stars, 0, empty_stars
+
     def save(self, *args, **kwargs):
         if self.rate > 5:
             self.rate = 5
